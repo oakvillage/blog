@@ -14,5 +14,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: test
       run: |
-        git status
-        ls -la
+        mkdir content
+        touch content/sample.html
+        git add .
+        git commit -m 'add content'
+        git push origin main
