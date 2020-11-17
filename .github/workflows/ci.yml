@@ -16,6 +16,8 @@ jobs:
       run: |
         mkdir content
         touch content/sample.html
+        git config --global user.email "kimurazaka@gmail.com"
+        git config --global user.name "OakVillage"
         git add .
         git commit -m 'add content'
         git push origin main
