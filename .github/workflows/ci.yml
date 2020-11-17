@@ -1,0 +1,17 @@
+name: publish
+
+on:
+  push:
+    inputs:
+      name:
+        description: 'deploy content'
+        required: true
+        default: 'default content'
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: |
+        git status
+        git branch
