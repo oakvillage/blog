@@ -11,7 +11,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - run: |
+    - uses: actions/checkout@v2
+    - name: git test
+      run: |
         git status
         git branch
