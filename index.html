@@ -15,7 +15,7 @@
     <p>Hello, World!</p>
 
     <script>
-        () => {
+        (() => {
             try {
                 fetch('api.github.com/graphql', {
                     method: 'POST',
@@ -55,7 +55,7 @@
             } catch (error) {
                 console.log(error);
             }
-        };
+        })();
     </script>
 </body>
 
