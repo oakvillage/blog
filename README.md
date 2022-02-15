@@ -1,1 +1,1 @@
-# My blog
+[ブログページはこちら](https://oakvillage.github.io/blog/)

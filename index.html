@@ -7,11 +7,29 @@
     <title>My Blog.</title>
 </head>
 <body>
+    <h1>花鳥風月</h1>
+
     <p>Hello, World!</p>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('aaa');
-        });
+        const handleInit = () => {
+            try {
+                fetch('api.github.com/graphql', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        query: ``
+                    })
+                }).then((response) => {
+                    console.log(response.json());
+                    return response.json();
+                })
+            } catch(error) {
+                console.log(error);
+            }
+        }
     </script>
 </body>
 </html>
