@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +8,14 @@
     <link rel="icon" href="/blog/favicon.ico" id="favicon">
     <title>My Blog.</title>
 </head>
+
 <body>
     <h1>花鳥風月</h1>
 
     <p>Hello, World!</p>
 
     <script>
-        const handleInit = () => {
+        () => {
             try {
                 fetch('api.github.com/graphql', {
                     method: 'POST',
@@ -21,16 +23,40 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        query: ``
+                        query: `
+                        search(type: ISSUE, query: "repo:oakvillage/blog is:issue", last: 10) {
+                            issueCount
+                            nodes {
+                              ... on Issue {
+                                id
+                                number
+                                title
+                                bodyHTML
+                                comments(last: 10) {
+                                  edges {
+                                    node {
+                                      author {
+                                        avatarUrl
+                                        login
+                                      }
+                                      bodyHTML
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                        }
+                        `
                     })
                 }).then((response) => {
                     console.log(response.json());
                     return response.json();
                 })
-            } catch(error) {
+            } catch (error) {
                 console.log(error);
             }
-        }
+        };
     </script>
 </body>
+
 </html>
