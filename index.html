@@ -17,7 +17,9 @@
     <p class="comment1"></p>
 
     <script>
-        console.log((await fetch("https://api.github.com/repos/oakvillage/blog/issues")).json());
+        const result = await fetch("https://api.github.com/repos/oakvillage/blog/issues").then((response) => {
+          return response.json();
+        });
     </script>
 </body>
 
