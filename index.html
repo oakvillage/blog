@@ -12,51 +12,12 @@
 <body>
     <h1>花鳥風月</h1>
 
-    <p>Hello, World!</p>
+    <p class="title1">Hello, World!</p>
+    <p class="content1"></p>
+    <p class="comment1"></p>
 
     <script>
-        (() => {
-            try {
-                fetch('api.github.com/graphql', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        query: `
-                        search(type: ISSUE, query: "repo:oakvillage/blog is:issue", last: 10) {
-                            issueCount
-                            nodes {
-                              ... on Issue {
-                                id
-                                number
-                                title
-                                bodyHTML
-                                comments(last: 10) {
-                                  edges {
-                                    node {
-                                      author {
-                                        avatarUrl
-                                        login
-                                      }
-                                      bodyHTML
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                        }
-                        `,
-                        variables: {}
-                    })
-                }).then((response) => {
-                    console.log(response.json());
-                    return response.json();
-                })
-            } catch (error) {
-                console.log(error);
-            }
-        })();
+        console.log((await fetch("https://api.github.com/repos/oakvillage/blog/issues")).json());
     </script>
 </body>
 
