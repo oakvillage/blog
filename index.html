@@ -17,10 +17,13 @@
     <p class="comment1"></p>
 
     <script>
-        const result = await fetch("https://api.github.com/repos/oakvillage/blog/issues").then((response) => {
-          return response.json();
-        });
-        console.log(result);
+        async function get() {
+          const result = await fetch("https://api.github.com/repos/oakvillage/blog/issues").then((response) => {
+            return response.json();
+          });
+          console.log(result);
+        }
+        get();
     </script>
 </body>
 
