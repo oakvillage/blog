@@ -13,7 +13,7 @@ jobs:
     env:
       key: ${{secrets.DEPLOY_KEY}}
     runs-on: ubuntu-22.04
-    if: key == ${{github.event.inputs.deploy_key}}
+    if: contains(${{ github.event.inputs.deploy_key }}, secrets.DEPLOY_KEY)
     steps:
     - name: Git configuration
       uses: actions/checkout@v3
