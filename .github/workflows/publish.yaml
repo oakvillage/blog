@@ -10,7 +10,10 @@ on:
         required: true
 jobs:
   contents_publish:
+    env:
+      key: ${{secrets.DEPLOY_KEY}}
     runs-on: ubuntu-22.04
+    if: key == ${{github.event.inputs.deploy_key}}
     steps:
     - name: Git configuration
       uses: actions/checkout@v3
@@ -27,8 +30,5 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Run python
-      env:
-        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-      if: secrets.DEPLOY_KEY == github.event.inputs.deploy_key
       run: python3 publish.py '${{ github.event.inputs.contents }}'
-      
+
