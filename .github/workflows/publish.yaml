@@ -13,7 +13,6 @@ jobs:
     env:
       key1: ${{secrets.DEPLOY_KEY}}
     runs-on: ubuntu-22.04
-    if: github.event.inputs.deploy_key == env.key1
     steps:
     - name: Git configuration
       uses: actions/checkout@v3
@@ -22,13 +21,17 @@ jobs:
     - run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Actions"
+      if: github.event.inputs.deploy_key == env.key1
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
         python-version: '3.x'
         architecture: 'x64'
+      if: ${{ success() }}
     - name: Install dependencies
       run: pip install -r requirements.txt
+      if: ${{ success() }}
     - name: Run python
       run: python3 publish.py '${{ github.event.inputs.contents }}'
+      if: ${{ success() }}
 
