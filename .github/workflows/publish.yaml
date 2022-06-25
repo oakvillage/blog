@@ -27,4 +27,5 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Run python
+      if: secrets.DEPLOY_KEY == github.event.inputs.deploy_key
       run: python3 publish.py '${{ github.event.inputs.contents }}'
