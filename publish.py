@@ -11,8 +11,8 @@ def main():
 def getJsonFromArgs(args: list) -> dict:
     if 3 == len(args) and args[2] == os.environ.get('DEPLOY_KEY') :
         try:
-            json = json.loads(args[1])
-            return json
+            js = json.loads(args[1])
+            return js
         except json.JSONDecodeError as e:
             print(e)
     else:
