@@ -29,4 +29,6 @@ jobs:
     - name: Run python
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-      run: python3 publish.py '${{ github.event.inputs.contents }}' '${{ github.event.inputs.deploy_key }}'
+      if: secrets.DEPLOY_KEY == github.event.inputs.deploy_key
+      run: python3 publish.py '${{ github.event.inputs.contents }}'
+      
