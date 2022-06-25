@@ -11,9 +11,9 @@ on:
 jobs:
   contents_publish:
     env:
-      key: ${{secrets.DEPLOY_KEY}}
+      key1: ${{secrets.DEPLOY_KEY}}
     runs-on: ubuntu-22.04
-    if: github.event.inputs.deploy_key == env.key
+    if: github.event.inputs.deploy_key == env.key1
     steps:
     - name: Git configuration
       uses: actions/checkout@v3
