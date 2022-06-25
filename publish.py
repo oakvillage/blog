@@ -1,3 +1,4 @@
+from typing import Union
 import sys, os, json
 
 def main():
@@ -6,11 +7,9 @@ def main():
     contents = getJsonFromArgs(args)
     if contents is not None:
         print(json.dumps(contents))
-    else:
-        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 
 # コマンドライン引数からjsonを取得する
-def getJsonFromArgs(args: list) -> dict:
+def getJsonFromArgs(args: list) -> Union(dict, list):
     if 3 == len(args) and args[2] == os.environ.get('DEPLOY_KEY') :
         try:
             js = json.loads(args[1])
