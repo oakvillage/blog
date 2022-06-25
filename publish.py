@@ -6,6 +6,8 @@ def main():
     contents = getJsonFromArgs(args)
     if contents is not None:
         print(json.dumps(contents))
+    else:
+        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 
 # コマンドライン引数からjsonを取得する
 def getJsonFromArgs(args: list) -> dict:
