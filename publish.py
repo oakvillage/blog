@@ -1,8 +1,12 @@
-import sys
+import sys, os
 
 def main():
-    args = sys.argv
-    print(args[1])
+    contents = args = sys.argv[1]
+    deploy_key = sys.argv[2]
+    if deploy_key == os.environ.get('DEPLOY_KEY'):
+        print(contents)
+    else:
+        print('deploy_key invalid.')
 
 # メイン処理
 if __name__ == '__main__':
