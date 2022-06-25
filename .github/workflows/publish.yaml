@@ -10,7 +10,7 @@ on:
         required: true
 jobs:
   contents_publish:
-    runs-on: ubuntu-latests
+    runs-on: ubuntu-22.04
     steps:
     - name: Git configuration
       uses: actions/checkout@v3
