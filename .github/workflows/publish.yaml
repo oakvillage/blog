@@ -10,8 +10,7 @@ on:
         required: true
 jobs:
   contents_publish:
-    runs-on: ubuntu-latest
-    if: secrets.DEPLOY_KEY == ${{ github.event.inputs.deploy_key }}: 
+    runs-on: ubuntu-latests
     steps:
     - name: Git configuration
       uses: actions/checkout@v3
