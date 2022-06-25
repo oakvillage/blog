@@ -1,0 +1,31 @@
+name: Contents publish workflow
+on:
+  workflow_dispatch:
+    inputs:
+      contents:
+        description: Blog contents.
+        required: true
+      deploy_key:
+        description: Deploy secret key.
+        required: true
+jobs:
+  contents_publish:
+    runs-on: ubuntu-latest
+    if: secrets.DEPLOY_KEY == ${{ github.event.inputs.deploy_key }}: 
+    steps:
+    - name: Git configuration
+      uses: actions/checkout@v3
+      with:
+        ref: main
+    - run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Actions"
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Run python
+      run: python3 publish.py '${{ github.event.inputs.contents }}'
