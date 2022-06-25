@@ -1,15 +1,16 @@
 from typing import Union
 import sys, os, json
 
-def main():
+def main() -> None:
     args = sys.argv
 
     contents = getJsonFromArgs(args)
     if contents is not None:
         print(json.dumps(contents))
+        print(type(contents))
 
 # コマンドライン引数からjsonを取得する
-def getJsonFromArgs(args: list) -> Union(dict, list):
+def getJsonFromArgs(args: list) -> dict|list:
     if 3 == len(args) and args[2] == os.environ.get('DEPLOY_KEY') :
         try:
             js = json.loads(args[1])
