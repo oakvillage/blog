@@ -1,0 +1,101 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "array",
+    "items": [
+        {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "content": {
+                    "type": "string"
+                },
+                "content_markdown": {
+                    "type": "string"
+                },
+                "content_not_include_html": {
+                    "type": "string"
+                },
+                "base64_encoded_images": {
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "filename": {
+                                    "type": "string"
+                                },
+                                "image": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "filename",
+                                "image"
+                            ]
+                        }
+                    ]
+                },
+                "enable": {
+                    "type": "boolean"
+                },
+                "publish_timestamp": {
+                    "type": "string"
+                },
+                "enable_comments": {
+                    "type": "boolean"
+                },
+                "creator": {
+                    "type": "string"
+                },
+                "created_timestapm": {
+                    "type": "string"
+                },
+                "updator": {
+                    "type": "string"
+                },
+                "updated_timestamp": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "category",
+                "tags",
+                "content",
+                "content_markdown",
+                "content_not_include_html",
+                "base64_encoded_images",
+                "enable",
+                "publish_timestamp",
+                "enable_comments",
+                "creator",
+                "created_timestapm",
+                "updator",
+                "updated_timestamp"
+            ]
+        }
+    ]
+}

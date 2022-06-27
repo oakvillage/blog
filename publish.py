@@ -8,6 +8,7 @@ def main() -> None:
     if contents is None or not validate_json_schema(contents):
         sys.exit('json error.')
 
+# 受け取ったjsonを検証する
 def validate_json_schema(contents: dict|list) -> bool:
     with open('schema.json') as schemaObj:
         schema = json.load(schemaObj)
@@ -26,6 +27,8 @@ def get_json_from_args(args: list) -> dict|list:
             return js
         except json.JSONDecodeError as e:
             print(e)
+        except:
+            print('error.')
     else:
         print('Argments are not valid.')
     return None
