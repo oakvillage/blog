@@ -56,8 +56,10 @@ def validate_json_schema(contents: dict|list) -> bool:
 # 記事内容をHTMLにて出力する
 def output_html(contents: list) -> None:
     for content in contents:
+        dir_path = DIST_DIR + '/' + content['category']
         filename = content['slug'] + '.html'
-        with open(filename) as f:
+        os.makedirs(dir_path, exist_ok=True)
+        with open(dir_path + '/' + filename, 'w') as f:
             f.write(content['content'])
 
 # メイン処理
