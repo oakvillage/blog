@@ -1,6 +1,7 @@
 {
   "name": "blog",
   "version": "1.0.0",
+  "main": "docs/app.js",
   "description": "[ブログページはこちら](https://oakvillage.github.io/blog/)",
   "scripts": {
     "test": ""
