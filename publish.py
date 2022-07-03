@@ -2,6 +2,7 @@ from jsonschema import validate, ValidationError
 import sys, os, json
 
 DIST_DIR = 'docs'
+MD_DIR = 'src/markdown'
 
 # Githubにてデプロイ中のエラーを検出
 class AppError(Exception): pass
@@ -18,6 +19,7 @@ def main() -> None:
         output_html(contents)
 
         # 検索用インデックスのjsonを追加し、出力する
+        merge_contents_info(contents)
 
         # コメントを受け付ける為のissueを作成する
 
@@ -56,11 +58,22 @@ def validate_json_schema(contents: dict|list) -> bool:
 # 記事内容をHTMLにて出力する
 def output_html(contents: list) -> None:
     for content in contents:
+        # HTMLを出力
         dir_path = DIST_DIR + '/' + content['category']
         filename = content['slug'] + '.html'
-        os.makedirs(dir_path, exist_ok=True)
-        with open(dir_path + '/' + filename, 'w') as f:
-            f.write(content['content'])
+        output_file(dir_path, filename, content['content'])
+        # markdownを出力
+        dir_path = MD_DIR + '/' + content['category']
+        filename = content['slug'] + '.md'
+        output_file(dir_path, filename, content['content_markdown']
+        
+def output_file(path: str, filename: str, content: str) -> None:
+    os.makedirs(path, exist_ok=True)
+    with open(path + '/' + filename, 'w') as f:
+        f.write(content)
+
+def merge_contents_info(contents: list) -> None:
+    pass
 
 # メイン処理
 if __name__ == '__main__':
