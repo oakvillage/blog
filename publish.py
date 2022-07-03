@@ -10,8 +10,8 @@ def main() -> None:
     args = sys.argv
     # 引数からjsonを取得、検証を行う
     contents = get_json_from_args(args)
-    if contents is None or not validate_json_schema(contents):
-        sys.exit('json error.')
+    # if contents is None or not validate_json_schema(contents):
+    #     sys.exit('json error.')
 
     try:
         # 記事を出力する
