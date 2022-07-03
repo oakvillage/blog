@@ -56,9 +56,9 @@ def validate_json_schema(contents: dict|list) -> bool:
 # 記事内容をHTMLにて出力する
 def output_html(contents: list) -> None:
     for content in contents:
-        filename = 
-        with open(filename) as js:
-            
+        filename = content['slug'] + '.html'
+        with open(filename) as f:
+            f.write(content['content'])
 
 # メイン処理
 if __name__ == '__main__':
