@@ -46,7 +46,7 @@ def get_json_from_args(args: list) -> dict|list:
 
 # 受け取ったjsonを検証する
 def validate_json_schema(contents: dict|list) -> bool:
-    with open('schema.json') as schemaObj:
+    with open('schema.json', 'r') as schemaObj:
         schema = json.load(schemaObj)
         try:
             validate(contents, schema)
@@ -73,7 +73,9 @@ def output_file(path: str, filename: str, content: str) -> None:
         f.write(content)
 
 def merge_contents_info(contents: list) -> None:
-    pass
+    with open(DIST_DIR + '/blog_info.json', 'r+') as blog_info:
+    for content in contents:
+        
 
 # メイン処理
 if __name__ == '__main__':
