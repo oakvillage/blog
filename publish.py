@@ -73,9 +73,12 @@ def output_file(path: str, filename: str, content: str) -> None:
         f.write(content)
 
 def merge_contents_info(contents: list) -> None:
-    with open(DIST_DIR + '/blog_info.json', 'r+') as blog_info:
-    for content in contents:
-        
+    with open(DIST_DIR + '/blog-info.json', 'r+') as blog_info:
+        info = json.load(blog_info)
+        for content in contents:
+            title = content['title']
+            pure_content = content['content_not_include_html']
+            info[title + content] = {}
 
 # メイン処理
 if __name__ == '__main__':
