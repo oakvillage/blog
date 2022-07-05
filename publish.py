@@ -1,5 +1,5 @@
 from jsonschema import validate, ValidationError
-import sys, os, json
+import sys, os, json, datetime
 
 DIST_DIR = 'docs'
 MD_DIR = 'src/markdown'
@@ -72,13 +72,32 @@ def output_file(path: str, filename: str, content: str) -> None:
     with open(path + '/' + filename, 'w') as f:
         f.write(content)
 
-def merge_contents_info(contents: list) -> None:
-    with open(DIST_DIR + '/blog-info.json', 'r+') as blog_info:
-        info = json.load(blog_info)
+def merge_search_index(contents: list) -> None:
+    with open(DIST_DIR + '/data/search-index.json', 'r+') as f:
+        info = json.load(f)
         for content in contents:
             title = content['title']
             pure_content = content['content_not_include_html']
-            info[title + content] = {}
+            info[title + pure_content] = {
+                'slug': '',
+                'category': '',
+                'creator': '',
+                'created_timestamp': '',
+                'updator': '',
+                'updated_timestamp': ''
+            }
+            
+def merge_date_summary(contents: list) -> None:
+    with open(DIST_DIR + '/data/date-summary.json', 'r+') as f:
+        summary = json.load(f)
+        for content in contents:
+            created_at = datetime.datetime.strptime(content['created_timestamp'], '%Y%m%d')
+            year = created_at.year
+            month = created_at.month
+            day = created_at.day
+            summary[year][month][day] = {
+            
+            }
 
 # メイン処理
 if __name__ == '__main__':
