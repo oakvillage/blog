@@ -96,8 +96,19 @@ def merge_date_summary(contents: list) -> None:
             month = created_at.month
             day = created_at.day
             summary[year][month][day] = {
-            
+                'title': content['title'],
+                'categories': content['categories'],
+                'slug': content['slug']
             }
+
+def merge_categories_summary(contents: list) -> None:
+    with open(DIST_DIR + '/data/categories-summary.json', 'r+') as f:
+        summaries = json.load(f)
+        for content in contents:
+            # パーマリンクから空要素無しの配列を作成
+            arr_categories = content['categories'].split('/')
+            arr_categories = [c for c in arr_categories if c != '']
+            categories = '/'.join(arr_categories)
 
 # メイン処理
 if __name__ == '__main__':
