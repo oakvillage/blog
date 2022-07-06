@@ -9,20 +9,28 @@ class AppError(Exception): pass
 
 def main() -> None:
     args = sys.argv
-    # 引数からjsonを取得、検証を行う
-    contents = get_json_from_args(args)
-    # if contents is None or not validate_json_schema(contents):
-    #     sys.exit('json error.')
 
     try:
+        # 引数からjsonを取得、検証を行う
+        contents = get_json_from_args(args)
+        
+        # if contents is None or not validate_json_schema(contents):
+        #     sys.exit('json error.')
+
         # 記事を出力する
         output_html(contents)
 
         # 検索用インデックスのjsonを追加し、出力する
         merge_contents_info(contents)
+        
+        # 日付別サマリに追加
+        merge_date_summary(contents)
+        
+        # カテゴリ別サマリに追加
+        merge_categories_summary(contents)
 
         # コメントを受け付ける為のissueを作成する
-
+        enable _comments()
     except AppError as e:
         print('')
         sys.exit('')
@@ -109,6 +117,13 @@ def merge_categories_summary(contents: list) -> None:
             arr_categories = content['categories'].split('/')
             arr_categories = [c for c in arr_categories if c != '']
             categories = '/'.join(arr_categories)
+
+def merge_tag_index(contants: list) -> None:
+    with open(DIST_DIR + '/data/tag-index.json', 'r+') as f:
+        index = json.load(f)
+        
+def enable_comments() -> bool:
+    pass
 
 # メイン処理
 if __name__ == '__main__':
