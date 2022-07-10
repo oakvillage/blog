@@ -2,5 +2,6 @@ attrs==21.4.0
 gitdb==4.0.9
 GitPython==3.1.27
 jsonschema==4.4.0
+Markdown==3.3.7
 pyrsistent==0.18.1
 smmap==5.0.0
