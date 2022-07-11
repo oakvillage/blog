@@ -1,36 +1,26 @@
-{
-    "search-index": [
-        {
-            "title1+content": {
-            "slug": "title",
-            "category": "sample",
-            "content": "content1",
-            "creator": "",
-            "created_timestamp": "",
-            "updator": "",
-            "updated_timestamp": ""
+[
+    {
+        "title": "",
+        "slug": "",
+        "permanent_link": "",
+        "tags": [
+            "",
+            "",
+            ""
+        ],
+        "content_markdown": "",
+        "base64_encoded_images": [
+            {
+                "filename": "",
+                "image": ""
             }
-        }
-    ],
-    "date-summary": [
-        {
-            "2022": {
-                "01": {
-                    "01": [
-                        {
-                            "title": "",
-                            "category": "",
-                            "slug": "",
-                            "creator": "",
-                            "created_timestamp": "",
-                            "updator": "",
-                            "updated_timestamp": ""
-                        }
-                    ]
-                }
-            }
-        }
-    ],
-    "category-summary": [],
-    "tag-index": []
-}
+        ],
+        "enable": true,
+        "publish_timestamp": "",
+        "enable_comments": true,
+        "creator": "",
+        "created_timestamp": "",
+        "updator": "",
+        "updated_timestamp": ""
+    }
+]

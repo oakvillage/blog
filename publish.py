@@ -1,8 +1,7 @@
 from jsonschema import validate, ValidationError
-import sys, os, json, datetime
+import sys, os, json, datetime, markdown
 
 DIST_DIR = 'docs'
-MD_DIR = 'src/markdown'
 
 # Githubにてデプロイ中のエラーを検出
 class AppError(Exception): pass
@@ -21,13 +20,7 @@ def main() -> None:
         output_html(contents)
 
         # 検索用インデックスのjsonを追加し、出力する
-        merge_contents_info(contents)
-        
-        # 日付別サマリに追加
-        merge_date_summary(contents)
-        
-        # カテゴリ別サマリに追加
-        merge_categories_summary(contents)
+        merge_contents(contents)
 
         # コメントを受け付ける為のissueを作成する
         enable _comments()
@@ -67,61 +60,28 @@ def validate_json_schema(contents: dict|list) -> bool:
 def output_html(contents: list) -> None:
     for content in contents:
         # HTMLを出力
-        dir_path = DIST_DIR + '/' + content['category']
+        path = get_path_from_permanent_link(content['permanent_link'])
         filename = content['slug'] + '.html'
-        output_file(dir_path, filename, content['content'])
-        # markdownを出力
-        dir_path = MD_DIR + '/' + content['category']
-        filename = content['slug'] + '.md'
-        output_file(dir_path, filename, content['content_markdown']
+        html = markdown.markdown(content['content_markdown'])
+        output_file(path, filename, html)
+
+def get_path_from_permanent_link(permanent_link: str) -> str
+    return None
+
+def update_main_page(contents: list) -> None:
+    pass
         
-def output_file(path: str, filename: str, content: str) -> None:
+def output_file(path: str, filename: str, html: str) -> None:
     os.makedirs(path, exist_ok=True)
     with open(path + '/' + filename, 'w') as f:
         f.write(content)
 
-def merge_search_index(contents: list) -> None:
-    with open(DIST_DIR + '/data/search-index.json', 'r+') as f:
+def merge_contents(contents: list) -> None:
+    with open(DIST_DIR + '/data/contents.json', 'r+') as f:
         info = json.load(f)
-        for content in contents:
-            title = content['title']
-            pure_content = content['content_not_include_html']
-            info[title + pure_content] = {
-                'slug': '',
-                'category': '',
-                'creator': '',
-                'created_timestamp': '',
-                'updator': '',
-                'updated_timestamp': ''
-            }
-            
-def merge_date_summary(contents: list) -> None:
-    with open(DIST_DIR + '/data/date-summary.json', 'r+') as f:
-        summary = json.load(f)
-        for content in contents:
-            created_at = datetime.datetime.strptime(content['created_timestamp'], '%Y%m%d')
-            year = created_at.year
-            month = created_at.month
-            day = created_at.day
-            summary[year][month][day] = {
-                'title': content['title'],
-                'categories': content['categories'],
-                'slug': content['slug']
-            }
+        info += contents
+        f.write(json.dumps(info))
 
-def merge_categories_summary(contents: list) -> None:
-    with open(DIST_DIR + '/data/categories-summary.json', 'r+') as f:
-        summaries = json.load(f)
-        for content in contents:
-            # パーマリンクから空要素無しの配列を作成
-            arr_categories = content['categories'].split('/')
-            arr_categories = [c for c in arr_categories if c != '']
-            categories = '/'.join(arr_categories)
-
-def merge_tag_index(contants: list) -> None:
-    with open(DIST_DIR + '/data/tag-index.json', 'r+') as f:
-        index = json.load(f)
-        
 def enable_comments() -> bool:
     pass
 
