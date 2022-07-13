@@ -12,12 +12,12 @@ def main() -> None:
     try:
         # 引数からjsonを取得、検証を行う
         contents = get_json_from_args(args)
-        
-        # if contents is None or not validate_json_schema(contents):
-        #     sys.exit('json error.')
 
         # 記事を出力する
         output_html(contents)
+        
+        # トップページを更新する
+        update_main_page(contents)
 
         # 検索用インデックスのjsonを追加し、出力する
         merge_contents(contents)
@@ -45,17 +45,6 @@ def get_json_from_args(args: list) -> dict|list:
         print('Argments are not valid.')
     return None
 
-# 受け取ったjsonを検証する
-def validate_json_schema(contents: dict|list) -> bool:
-    with open('schema.json', 'r') as schemaObj:
-        schema = json.load(schemaObj)
-        try:
-            validate(contents, schema)
-            return True
-        except ValidationError as e:
-            print('json validate error')
-    return False
-
 # 記事内容をHTMLにて出力する
 def output_html(contents: list) -> None:
     for content in contents:
@@ -65,7 +54,7 @@ def output_html(contents: list) -> None:
         html = markdown.markdown(content['content_markdown'])
         output_file(path, filename, html)
 
-def get_path_from_permanent_link(permanent_link: str) -> str
+def get_path_from_permanent_link(permanent_link: str) -> str:
     return None
 
 def update_main_page(contents: list) -> None:
@@ -73,7 +62,7 @@ def update_main_page(contents: list) -> None:
         
 def output_file(path: str, filename: str, html: str) -> None:
     os.makedirs(path, exist_ok=True)
-    with open(path + '/' + filename, 'w') as f:
+    with open(path + filename, 'w') as f:
         f.write(content)
 
 def merge_contents(contents: list) -> None:
