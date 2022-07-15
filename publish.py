@@ -1,5 +1,5 @@
 from jsonschema import validate, ValidationError
-import sys, os, json, datetime, markdown
+import sys, os, json, datetime, markdown, re
 
 DIST_DIR = 'docs'
 
@@ -55,7 +55,7 @@ def output_html(contents: list) -> None:
         output_file(path, filename, html)
 
 def get_path_from_permanent_link(permanent_link: str) -> str:
-    return None
+    return re.sub('/(\/| ){2,}/', '/', '/' + permanent_link + '/')
 
 def update_main_page(contents: list) -> None:
     pass
