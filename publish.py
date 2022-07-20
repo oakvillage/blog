@@ -24,6 +24,9 @@ def main() -> None:
 
         # コメントを受け付ける為のissueを作成する
         enable _comments()
+        
+        # コミットする
+        commit()
     except AppError as e:
         print('')
         sys.exit('')
@@ -63,7 +66,7 @@ def update_main_page(contents: list) -> None:
 def output_file(path: str, filename: str, html: str) -> None:
     os.makedirs(path, exist_ok=True)
     with open(path + filename, 'w') as f:
-        f.write(content)
+        f.write(html)
 
 def merge_contents(contents: list) -> None:
     with open(DIST_DIR + '/data/contents.json', 'r+') as f:
@@ -72,6 +75,9 @@ def merge_contents(contents: list) -> None:
         f.write(json.dumps(info))
 
 def enable_comments() -> bool:
+    pass
+    
+def commit() -> None:
     pass
 
 # メイン処理
